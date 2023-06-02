@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Post;
 import com.example.demo.repository.PostRepository;
+
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
