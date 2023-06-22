@@ -1,0 +1,62 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.core.repository.UserRepository">
+    <select id="findAll" resultType="com.example.core.entity.User">
+        SELECT * FROM `user`
+    </select>
+
+    <select id="find" resultType="com.example.core.entity.User">
+        SELECT * FROM `user`
+        WHERE
+        <if test="id != null">
+            id = #{id}
+        </if>
+        <if test="username != null">
+            username = #{username}
+        </if>
+        <if test="email != null">
+            email = #{email}
+        </if>
+        <if test="address != null">
+            address = #{address}
+        </if>
+    </select>
+
+    <insert
+            flushCache="true"
+            id="create"
+            parameterType="com.example.core.entity.User"
+            timeout="20">
+        <![CDATA[
+    INSERT INTO user (username, password, email, address, created_at, updated_at, created_by, updated_by) VALUES (
+      #{username}
+      ,#{password}
+      ,#{email}
+      ,#{address}
+      ,#{createdAt}
+      ,#{updatedAt}
+      ,#{createdBy}
+      ,#{updatedBy}
+    )
+    ]]>
+    </insert>
+
+    <update id="update" parameterType="com.example.core.entity.User">
+        UPDATE user
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="address != null">address=#{address},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.example.core.entity.User">
+        <![CDATA[
+      DELETE FROM `user`
+      WHERE id = #{id}
+    ]]>
+    </delete>
+</mapper>

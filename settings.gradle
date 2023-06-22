@@ -1,1 +1,3 @@
-rootProject.name = 'demo'
+rootProject.name = 'java_spring_boot'
+include 'java_spring_boot-api'
+include 'java_spring_boot-core'
