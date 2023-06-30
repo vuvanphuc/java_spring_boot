@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper
 public interface UserRepository {
 
-  List<User> findAll();
+  List<User> findAll(User user);
 
-  List<User> find(User user);
+  int count(User user);
 
   Long create(User user);
 

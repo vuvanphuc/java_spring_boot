@@ -1,26 +1,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.example.core.repository.UserRepository">
     <select id="findAll" resultType="com.example.core.entity.User">
-        SELECT * FROM `user`
+        SELECT * FROM user
+        <where>
+            <if test="id != null">id=#{id}</if>
+            <if test="username != null">AND username like #{username}</if>
+            <if test="email != null">AND email like #{email}</if>
+            <if test="address != null">AND address like #{address}</if>
+        </where>
+        ORDER BY id
+        LIMIT #{pageNumber}, #{pageSize}
     </select>
 
-    <select id="find" resultType="com.example.core.entity.User">
-        SELECT * FROM `user`
-        WHERE
-        <if test="id != null">
-            id = #{id}
-        </if>
-        <if test="username != null">
-            username = #{username}
-        </if>
-        <if test="email != null">
-            email = #{email}
-        </if>
-        <if test="address != null">
-            address = #{address}
-        </if>
+    <select id="count" resultType="int">
+        SELECT COUNT(id) FROM user
+        <where>
+            <if test="id != null">id=#{id}</if>
+            <if test="username != null">AND username like #{username}</if>
+            <if test="email != null">AND email like #{email}</if>
+            <if test="address != null">AND address like #{address}</if>
+        </where>
+        ORDER BY id
+        LIMIT #{pageNumber}, #{pageSize}
     </select>
 
     <insert
